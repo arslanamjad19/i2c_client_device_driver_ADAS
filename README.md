@@ -18,7 +18,7 @@ The project is divided into two main layers:
 1.  **Kernel Space (C Drivers):** Handles direct hardware register access, interrupts, and protocol communication (I2C, GPIO).
 2.  **User Space (Python Application):** Handles computer vision, sensor data aggregation, and control logic.
 
-![Code Hierarchy](INSERT_IMAGE_OF_CODE_HIERARCHY_HERE)
+![Code Hierarchy](https://github.com/arslanamjad19/i2c_client_device_driver_ADAS/blob/342c77297592a3da122b6ee935ebe9a98de9c5b4/Code_Heirarchy.png)
 <!-- Placeholder: Insert a diagram showing the flow from Python App -> /dev/ nodes -> Kernel Drivers -> Hardware -->
 
 ## 📂 File Structure

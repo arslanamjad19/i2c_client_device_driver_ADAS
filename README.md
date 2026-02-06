@@ -47,13 +47,13 @@ DC Motors with Driver (e.g., L298N).
 1. Build Kernel Modules
 You must have the Linux kernel headers installed for your running kernel version.
 
-bash
+```bash
 # Example Makefile commands (Create a Makefile if not present)
 make -C /lib/modules/$(uname -r)/build M=$(pwd) modules
+```
 2. Load Drivers
 Insert the compiled kernel modules (.ko files) into the kernel.
-
-bash
+```bash
 # Load MPU6050 Driver
 sudo insmod IMU_I2C.ko
 
@@ -62,24 +62,26 @@ sudo insmod Ultrasonic_Sensor.ko trig_pin=17 echo_pin=27
 
 # Load GPIO/LED Driver
 sudo insmod LED_GPIO.ko
+```
 Note: Ensure device tree overlays are configured correctly for I2C if necessary.
 
 🚀 Usage
 Running the Autonomous Loop
 The main Python script integrates all features. It captures video, calculates lane curvature, checks for obstacles, and sends commands to the motor driver.
 
-bash
+```bash
 cd adas_features
 sudo python3 autonomous_vehicle_main.py
+```
 🧩 Module Details
-IMU Driver (IMU_I2C.c)
-Device: /dev/mpu6050
+IMU Driver (```IMU_I2C.c```)
+Device: ```/dev/mpu6050```
 Functionality: Initializes the MPU6050, configures power management, and exposes raw accelerometer and gyroscope data.
 Interface: Read from the device file to get formatted sensor data.
-Ultrasonic Driver (Ultrasonic_Sensor.c)
-Interface: /proc/hcsr04/text (Human readable) and /proc/hcsr04/raw (Raw integer).
-Functionality: Uses ktime and GPIO interrupts to measure the time-of-flight of the ultrasonic pulse with high precision in kernel space, avoiding user-space scheduling jitter.
-Lane Detection (Lane_Detection.py)
+Ultrasonic Driver (```Ultrasonic_Sensor.c```)
+Interface: ```/proc/hcsr04/text``` (Human readable) and ```/proc/hcsr04/raw``` (Raw integer).
+Functionality: Uses ```ktime``` and GPIO interrupts to measure the time-of-flight of the ultrasonic pulse with high precision in kernel space, avoiding user-space scheduling jitter.
+Lane Detection (```Lane_Detection.py```)
 Pipeline:
 Thresholding: Filters for white lane markings using HSV color space.
 Warping: Applies a perspective transform (Bird's Eye View).
@@ -88,6 +90,5 @@ Curve Calculation: Determines the steering offset required to center the vehicle
 📝 Configuration
 Pin assignments and calibration values can be adjusted in the respective files:
 
-Ultrasonic Pins: Modify module_param defaults in Ultrasonic_Sensor.c or pass as insmod arguments.
-Camera Calibration: Adjust valTrackbars defaults in Lane_Detection.py.
-    └── Motor_Driver.py             # Interface for Motor control
+Ultrasonic Pins: Modify ```module_param``` defaults in ```Ultrasonic_Sensor.c``` or pass as insmod arguments.
+Camera Calibration: Adjust ```valTrackbars``` defaults in ```Lane_Detection.py```.

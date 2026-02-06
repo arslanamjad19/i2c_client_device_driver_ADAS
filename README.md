@@ -1,4 +1,4 @@
-# I2C Client Device Driver & ADAS System
+# I2C Client Device Driver for ADAS System
 
 This repository contains a Linux-based Advanced Driver Assistance System (ADAS) implementation for a Raspberry Pi-based autonomous vehicle. It combines custom Linux kernel drivers for hardware interfacing (Sensors, Motors) with a Python-based high-level application for lane detection, object avoidance, and autonomous control.
 
